@@ -1,0 +1,42 @@
+.tabs {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.btn {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  line-height: 20px;
+  letter-spacing: 0.5px;
+  align-items: center;
+  text-align: center;
+  color: #4A4A4A;
+  background-color: #FFFFFF;
+  border: 1px solid #DFE5EC;
+  width: 168px;
+  text-transform: uppercase;
+
+  @media (max-width: 767px) {
+    font-size: 10px;
+  }
+}
+
+.btn:first-child {
+  border-radius: 7px 0 0 7px;
+}
+
+.btn:nth-child(2) {
+  border-left: none;
+  border-right: none;
+}
+
+.btn:last-child {
+  border-radius: 0 7px 7px 0;
+}
+
+.btn:active {
+  background-color: #2196F3;
+  color: #FFFFFF;
+  box-shadow: 0 0 10px rgba(0,0,0,0.25)
+}

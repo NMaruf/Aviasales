@@ -1,0 +1,67 @@
+.filter {
+  background-color: #FFFFFF;
+  display: flex;
+  flex-direction: column;
+  padding-top: 20px;
+  margin-right: 20px;
+  border-radius: 5px;
+  max-width: 232px;
+  max-height: 232px;
+
+  @media (max-width: 767px) {
+    margin-right: 0px;
+  }
+}
+
+header {
+  padding: 0 20px;
+  font-size: 12px;
+  line-height: 12px;
+  letter-spacing: 0.5px;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.checkbox__wrapper {
+  display: flex;
+  flex-direction: column;
+}
+
+.item {
+  height: 20px;
+  padding: 10px 0;
+  padding-left: 20px;
+  font-size: 13px;
+  line-height: 20px;
+  font-weight: 400;
+  color: #4A4A4A;
+}
+
+.item:hover {
+  background-color: #F1FCFF;
+}
+
+.check {
+  display: block;
+  padding-left: 30px;
+}
+
+.check__input {
+  position: absolute;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.check__box {
+  position: absolute;
+  margin-left: -30px;
+  width: 20px;
+  height: 20px;
+  background-image: url("/svg/checkbox-off.svg")
+}
+
+.check__input:checked + .check__box {
+  background-image: url('/svg/checkbox-on.svg');
+}
+
