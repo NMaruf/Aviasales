@@ -26,10 +26,10 @@
         "react", "jsx-a11y", "import", "react-hooks", "prettier"
     ],
     "rules": {
-        "indent": ["error", 2], //отступ в 2 пробела:
+//        "indent": ["error", 2], //отступ в 2 пробела:
         "no-plusplus": "off", //разрешить оператор ++
         "max-len": ["error", {
-            "code": 125
+            "code": 130
         }],                   // длина строки > 120
         "object-curly-newline": ["error", { "multiline": true }],
         "react/jsx-one-expression-per-line": "off", // один элемент на строку
@@ -48,6 +48,7 @@
         "class-methods-use-this": "off",
         "import/no-unresolved": [2, { "caseSensitive": false }], // игнорирование регистра
         "import/no-named-as-default": 0,
+        "no-case-declarations": "off",
         "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }], // разрешить js, jsx
         "import/order": [
             2,
