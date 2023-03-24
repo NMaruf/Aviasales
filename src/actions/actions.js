@@ -1,4 +1,8 @@
-export const onFilterChange = (filterId, filters) => {
+import AviasalesService from '../services/service'
+
+const aviasalesService = new AviasalesService()
+
+export const filterChange = (filterId, filters) => {
   const type = filterId === 1 ? 'SHOW_ALL' : 'SHOW_CURRENT'
   return {
     type,
@@ -8,3 +12,38 @@ export const onFilterChange = (filterId, filters) => {
 }
 
 export const tabsToggle = (id) => ({ type: 'TABS_TOGGLE', id })
+
+export const ticketsRequested = () => ({ type: 'TICKETS_REQUEST' })
+
+export const ticketsLoaded = (tickets) => ({
+  type: 'TICKETS_SUCCESS',
+  tickets,
+})
+
+export const ticketsError = (error) => ({
+  type: 'TICKETS_ERROR',
+  error,
+})
+
+export const fetchTickets = () => () => (dispatch) => {
+  const func = () => {
+    dispatch(ticketsRequested())
+    aviasalesService
+      .getAllTickets()
+      .then((res) => {
+        dispatch(ticketsLoaded(res.tickets))
+        if (res.stop === false) {
+          func()
+        } else {
+          console.log('Received: ', res.stop)
+        }
+      })
+      .catch((err) => {
+        if (Number(err.message) === 500) {
+          return func()
+        }
+        return dispatch(ticketsError(err))
+      })
+  }
+  return func()
+}

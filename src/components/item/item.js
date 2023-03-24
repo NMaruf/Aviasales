@@ -1,40 +1,81 @@
 import React from 'react'
+import { add, format } from 'date-fns'
 
 import classes from './item.module.scss'
 
-export default function Item({ id, price }) {
+/* eslint-disable */
+function morph(int, array) {
+  return (
+    (array = array || ['пересадка', 'пересадки', 'пересадок']) &&
+    array[int % 100 > 4 && int % 100 < 20 ? 2 : [2, 0, 1, 1, 1, 2][int % 10 < 5 ? int % 10 : 5]]
+  )
+}
+/* eslint-disable */
+
+export default function Item({ id, price, carrier, segments }) {
+  const date1 = format(
+    add(new Date(segments[0].date), {
+      minutes: segments[0].duration,
+    }),
+    'HH:mm'
+  )
+
+  const date2 = format(
+    add(new Date(segments[1].date), {
+      minutes: segments[1].duration,
+    }),
+    'HH:mm'
+  )
+
   return (
     <li className={classes.ticket} key={id}>
       <header className={classes.header}>
         <p className={classes.price}>{price} P</p>
-        <img src="../images/company-logo.svg" alt="company-logo" />
+        <img src={`https://pics.avs.io/99/36/${carrier}.png`} alt={`${carrier} logo`} />
       </header>
       <div className={classes.way}>
         <div className={classes.route}>
-          <p className={classes.text}>MOS-HKT</p>
-          <p className={classes.time}>10:45 - 08:00</p>
+          <p className={classes.text}>
+            {segments[0].origin}-{segments[0].destination}
+          </p>
+          <p className={classes.time}>
+            {format(new Date(segments[0].date), 'HH:mm')} - {date1}
+          </p>
         </div>
         <div className={classes.route}>
           <p className={classes.text}>В пути</p>
-          <p className={classes.time}>21ч 15м</p>
+          <p className={classes.time}>
+            {Math.floor(segments[0].duration / 60)}ч {Math.floor(segments[0].duration % 60)}м
+          </p>
         </div>
         <div className={classes.route}>
-          <p className={classes.text}>2 пересадки</p>
-          <p className={classes.stops}>HKG, JNB</p>
+          <p className={classes.text}>
+            {segments[0].stops.length > 0 ? segments[0].stops.length : 'без'} {morph(segments[0].stops.length)}
+          </p>
+          <p className={classes.stops}>{segments[0].stops.join(', ')}</p>
         </div>
       </div>
       <div className={classes.way}>
         <div className={classes.route}>
-          <p className={classes.text}>MOS-HKT</p>
-          <p className={classes.time}>11:20 - 00:50</p>
+          <p className={classes.text}>
+            {segments[1].origin}-{segments[1].destination}
+          </p>
+          <p className={classes.time}>
+            {' '}
+            {format(new Date(segments[1].date), 'HH:mm')} - {date2}
+          </p>
         </div>
         <div className={classes.route}>
           <p className={classes.text}>В пути</p>
-          <p className={classes.time}>13ч 30м</p>
+          <p className={classes.time}>
+            {Math.floor(segments[1].duration / 60)}ч {Math.floor(segments[1].duration % 60)}м
+          </p>
         </div>
         <div className={classes.route}>
-          <p className={classes.text}>1 пересадка</p>
-          <p className={classes.stops}>HKG</p>
+          <p className={classes.text}>
+            {segments[1].stops.length > 0 ? segments[1].stops.length : 'без'} {morph(segments[1].stops.length)}
+          </p>
+          <p className={classes.stops}>{segments[1].stops.join(', ')}</p>
         </div>
       </div>
     </li>

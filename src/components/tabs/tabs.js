@@ -7,16 +7,16 @@ import { tabsToggle } from '../../actions/actions'
 import classes from './tabs.module.scss'
 
 function Tabs({ tabs, onTabsToggle }) {
-  const btns = tabs.map(({ id, label, isActive }) => {
-    const className = cn(classes.btn, { [classes.active]: isActive === true })
+  const buttons = tabs.map(({ id, label, isActive }) => {
+    const classBtn = cn(classes.btn, { [classes.active]: isActive === true })
     return (
-      <button type="button" key={id} onClick={() => onTabsToggle(id)} className={className}>
+      <button type="button" key={id} onClick={() => onTabsToggle(id)} className={classBtn}>
         {label}
       </button>
     )
   })
 
-  return <div className={classes.tabs}>{btns}</div>
+  return <div className={classes.tabs}>{buttons}</div>
 }
 
 const mapStateToProps = (state) => ({ tabs: state.tabs.tabs })

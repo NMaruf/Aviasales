@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import * as actions from '../../actions/actions'
+import { filterChange } from '../../actions/actions'
 
 import classes from './filter.module.scss'
 
@@ -87,6 +87,7 @@ function Filter({ filtersData, onFilterChange }) {
   )
 }
 
-const mapStatetoProps = (state) => ({ ...state })
+const mapStatetoProps = (state) => ({ filtersData: state.filters })
+const mapDispatchToProps = (dispatch, state) => ({ onFilterChange: (id) => dispatch(filterChange(id, state.filters)) })
 
-export default connect(mapStatetoProps, actions)(Filter)
+export default connect(mapStatetoProps, mapDispatchToProps)(Filter)

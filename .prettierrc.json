@@ -4,5 +4,7 @@
   "endOfLine": "lf",
   "printWidth": 120,
   "semi": false,
-  "bracketSpacing": true
+  "singleAttributePerLine": false,
+  "bracketSpacing": true,
+  "bracketSameLine": false
 }

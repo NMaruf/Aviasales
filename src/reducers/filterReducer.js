@@ -1,12 +1,12 @@
 const initialState = {
   filters: [
-    { id: 1, filterName: 'Все', active: false },
-    { id: 2, filterName: 'Без пересадок', active: false },
-    { id: 3, filterName: '1 пересадка', active: false },
-    { id: 4, filterName: '2 пересадки', active: false },
-    { id: 5, filterName: '3 пересадки', active: false },
+    { id: 1, filterName: 'Все', active: true },
+    { id: 2, filterName: 'Без пересадок', active: true },
+    { id: 3, filterName: '1 пересадка', active: true },
+    { id: 4, filterName: '2 пересадки', active: true },
+    { id: 5, filterName: '3 пересадки', active: true },
   ],
-  filterInitialized: false,
+  filterInitialized: true,
 }
 
 // eslint-disable-next-line default-param-last
