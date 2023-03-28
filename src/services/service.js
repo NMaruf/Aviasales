@@ -1,4 +1,8 @@
+import ServiceLocalstorage from './service-localstorage'
+
 export default class AviasalesService {
+  localstorageService = new ServiceLocalstorage()
+
   _apiBase = 'https://aviasales-test-api.kata.academy/'
 
   async getSearchId() {
@@ -8,15 +12,15 @@ export default class AviasalesService {
       throw new Error(`Could not fetch SearchId, receiced ${res.status}`)
     }
     const jsonRes = await res.json()
-    const key = localStorage.getItem('searchId')
+    const key = this.localstorageService.getId('searchId')
     if (!key) {
-      localStorage.setItem('searchId', jsonRes.searchId)
+      this.localstorageService.setValue('searchId', jsonRes.searchId)
     }
     return jsonRes.searchId
   }
 
   async getAllTickets() {
-    let key = localStorage.getItem('searchId')
+    let key = this.localstorageService.getId('searchId')
     if (key === null) {
       key = await this.getSearchId()
     }

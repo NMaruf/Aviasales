@@ -3,32 +3,24 @@ import { add, format } from 'date-fns'
 
 import classes from './item.module.scss'
 
-/* eslint-disable */
-function morph(int, array) {
-  return (
-    (array = array || ['пересадка', 'пересадки', 'пересадок']) &&
-    array[int % 100 > 4 && int % 100 < 20 ? 2 : [2, 0, 1, 1, 1, 2][int % 10 < 5 ? int % 10 : 5]]
-  )
+function morph(n) {
+  const textForms = ['пересадка', 'пересадки', 'пересадок']
+  if (n > 1 && n < 5) {
+    return textForms[1]
+  }
+  if (n === 1) {
+    return textForms[0]
+  }
+  return textForms[2]
 }
-/* eslint-disable */
 
-export default function Item({ id, price, carrier, segments }) {
-  const date1 = format(
-    add(new Date(segments[0].date), {
-      minutes: segments[0].duration,
-    }),
-    'HH:mm'
-  )
+export default function Item({ price, carrier, segments }) {
+  const date1 = format(add(new Date(segments[0].date), { minutes: segments[0].duration }), 'HH:mm')
 
-  const date2 = format(
-    add(new Date(segments[1].date), {
-      minutes: segments[1].duration,
-    }),
-    'HH:mm'
-  )
+  const date2 = format(add(new Date(segments[1].date), { minutes: segments[1].duration }), 'HH:mm')
 
   return (
-    <li className={classes.ticket} key={id}>
+    <li className={classes.ticket}>
       <header className={classes.header}>
         <p className={classes.price}>{price} P</p>
         <img src={`https://pics.avs.io/99/36/${carrier}.png`} alt={`${carrier} logo`} />

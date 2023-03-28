@@ -17,26 +17,22 @@ const filterReducer = (state = initialState, action) => {
       const newArr = [...state.filters]
 
       return {
-        filters: newArr.map((filter) => {
-          // eslint-disable-next-line no-param-reassign
-          filter.active = !isActive
-          return filter
-        }),
+        filters: newArr.map((filter) => ({
+          ...filter,
+          active: !isActive,
+        })),
         filterInitialized: false,
       }
     case 'SHOW_CURRENT':
-      let isAllActive = true
+      const arr = state.filters.slice(1)
+      const idx = arr.findIndex((el) => el.id === action.filterId)
+      const oldItem = arr[idx]
+      const newItem = { ...oldItem, active: !oldItem.active }
 
-      const remainingFilters = state.filters.slice(1).map((filter) => {
-        if (filter.id === action.filterId) {
-          // eslint-disable-next-line no-param-reassign
-          filter.active = !filter.active
-        }
-        if (filter.active !== true) {
-          isAllActive = false
-        }
-        return filter
-      })
+      const remainingFilters = [...arr.slice(0, idx), newItem, ...arr.slice(idx + 1)]
+
+      const isAllActive = remainingFilters.every((filter) => filter.active === true)
+
       return {
         filters: [{ ...state.filters[0], active: isAllActive }, ...remainingFilters],
         filterInitialized: true,

@@ -10,10 +10,12 @@ const initialState = {
 const tabReducer = (state = initialState, action) => {
   switch (action.type) {
     case 'TABS_TOGGLE':
-      /* eslint-disable */
       const newTabs = state.tabs.map((tab) => {
-        return tab.id === action.id ? { ...tab, isActive: true } : { ...tab, isActive: false }
-      }) /* eslint-disable */
+        if (tab.id === action.id) {
+          return { ...tab, isActive: true }
+        }
+        return { ...tab, isActive: false }
+      })
       return { tabs: newTabs }
     default:
       return state

@@ -19,7 +19,6 @@ function ItemList({ tickets, loading, error, fetchTickets, tabs, filters }) {
     fetchTickets()
   }, [])
 
-  let id = 1
   const optimal = [...tickets]
   let sortedTickets
   for (let i = 0; i < tabs.length; i++) {
@@ -56,10 +55,10 @@ function ItemList({ tickets, loading, error, fetchTickets, tabs, filters }) {
   })
 
   const results = filteredTickets.slice(0, count).map((ticket) => {
-    id++
     const { price, carrier, segments } = ticket
+    const uniqId = segments[0].date + segments[1].date
 
-    return <Item key={id} id={id} price={price} carrier={carrier} segments={segments} />
+    return <Item key={uniqId} price={price} carrier={carrier} segments={segments} />
   })
 
   const errorMess = error ? <Alert message="Error" description={`${error}`} type="error" showIcon /> : null
