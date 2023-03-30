@@ -20,7 +20,7 @@ function Filter({ filtersData, onFilterChange }) {
               id="All"
               name="All"
               checked={filters[0].active}
-              onChange={() => onFilterChange(filters[0].id, filters)}
+              onChange={() => onFilterChange(filters[0].id)}
             />
             <span className={classes.check__box} />
             {filters[0].filterName}
@@ -34,7 +34,7 @@ function Filter({ filtersData, onFilterChange }) {
               id="Not"
               name="Not"
               checked={filters[1].active}
-              onChange={() => onFilterChange(filters[1].id, filters)}
+              onChange={() => onFilterChange(filters[1].id)}
             />
             <span className={classes.check__box} />
             {filters[1].filterName}
@@ -48,7 +48,7 @@ function Filter({ filtersData, onFilterChange }) {
               id="1"
               name="1"
               checked={filters[2].active}
-              onChange={() => onFilterChange(filters[2].id, filters)}
+              onChange={() => onFilterChange(filters[2].id)}
             />
             <span className={classes.check__box} />
             {filters[2].filterName}
@@ -62,7 +62,7 @@ function Filter({ filtersData, onFilterChange }) {
               id="2"
               name="2"
               checked={filters[3].active}
-              onChange={() => onFilterChange(filters[3].id, filters)}
+              onChange={() => onFilterChange(filters[3].id)}
             />
             <span className={classes.check__box} />
             {filters[3].filterName}
@@ -76,7 +76,7 @@ function Filter({ filtersData, onFilterChange }) {
               id="3"
               name="3"
               checked={filters[4].active}
-              onChange={() => onFilterChange(filters[4].id, filters)}
+              onChange={() => onFilterChange(filters[4].id)}
             />
             <span className={classes.check__box} />
             {filters[4].filterName}
@@ -88,6 +88,6 @@ function Filter({ filtersData, onFilterChange }) {
 }
 
 const mapStatetoProps = (state) => ({ filtersData: state.filters })
-const mapDispatchToProps = (dispatch, state) => ({ onFilterChange: (id) => dispatch(filterChange(id, state.filters)) })
+const mapDispatchToProps = (dispatch) => ({ onFilterChange: (id) => dispatch(filterChange(id)) })
 
 export default connect(mapStatetoProps, mapDispatchToProps)(Filter)

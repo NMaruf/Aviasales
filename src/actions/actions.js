@@ -11,12 +11,11 @@ const TICKETS_REQUEST = 'TICKETS_REQUEST'
 const TICKETS_SUCCESS = 'TICKETS_SUCCESS'
 const TICKETS_ERROR = 'TICKETS_ERROR'
 
-export const filterChange = (filterId, filters) => {
+export const filterChange = (filterId) => {
   const type = filterId === 1 ? SHOW_ALL : SHOW_CURRENT
   return {
     type,
     filterId,
-    filters,
   }
 }
 
